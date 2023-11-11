@@ -15,7 +15,7 @@ source env/bin/activate
 
 ## 2. Install the package
 
-pip install - r requirements.txt
+pip install -r requirements.txt
 
 ## 3. Connect your aws cli
 
