@@ -1,5 +1,9 @@
 # BigDataProject
 
+pip freeze > requirements.txt
+
+## 1. Activate the python environment
+
 ### Window
 
 env\Scripts\activate
@@ -9,4 +13,12 @@ deactivate
 
 source env/bin/activate
 
-pip freeze > requirements.txt
+## 2. Install the package
+
+pip install - r requirements.txt
+
+## 3. Connect your aws cli
+
+aws configure
+
+jupyternotebook
