@@ -1,4 +1,8 @@
 # BigDataProject
+### Window
+python -m venv env
+### MAC_OS/Linux
+python3 -m venv env
 
 pip freeze > requirements.txt
 
