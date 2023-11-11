@@ -21,4 +21,4 @@ pip install -r requirements.txt
 
 aws configure
 
-jupyternotebook
+jupyter notebook
