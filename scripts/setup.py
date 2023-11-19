@@ -129,7 +129,7 @@ if __name__ == "__main__":
     ## CHANGE THIS ###
     postfix = sys.argv[4]
     #s3_bucket_name = sys.argv[5]
-    '''
+
     CODEBUCKET = "code-" + postfix
     LANDINGZONE = "landing-zone-" + postfix
     CLEANINGBUCKET = "cleaning-zone-" + postfix
@@ -149,7 +149,7 @@ if __name__ == "__main__":
 
     upload_file(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, "../code/transform.py", CODEBUCKET)
     print("Finish uploading")
-    '''
+
     print("Creating Lambda")
     create_lambda_emr(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, postfix)
     print("Creating finish")
