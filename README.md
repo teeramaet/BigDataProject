@@ -30,10 +30,10 @@ deactivate
 pip install -r requirements.txt
 
 ## 3. Configure files to your setting
-In code/transient_emr.py
-**'Ec2KeyName': 'vockey',**\
-**'Ec2SubnetId': 'subnet-03022b7fca1546530',**\
-**LogUri="s3://aws-logs-580632447399-us-east-1/elasticmapreduce/",**\
+In code/transient_emr.py \
+'Ec2KeyName': 'vockey',\
+'Ec2SubnetId': 'subnet-03022b7fca1546530',\
+LogUri="s3://aws-logs-580632447399-us-east-1/elasticmapreduce/", 
 
 Then, zip the transient_emr.py to transient_emr.zip
 
