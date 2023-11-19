@@ -3,6 +3,7 @@ import boto3
 from botocore.exceptions import ClientError
 import os
 import sys
+import time
 
 def create_bucket(ACCESS_KEY: str, SECRET_KEY:str, SESSION_TOKEN: str, bucket_name: str) -> bool:
     """Create an S3 bucket
@@ -91,6 +92,7 @@ def create_lambda_emr(ACCESS_KEY: str, SECRET_KEY:str, SESSION_TOKEN: str, postf
     except ClientError as e:
         logging.error(e)
         return False
+    time.sleep(10)
     try:
         response2 = lambda_client.add_permission(
             Action='lambda:InvokeFunction',
