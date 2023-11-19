@@ -53,7 +53,7 @@ df6 = df5.withColumn("UTCDate", to_date("UTCDate", "yyyy.MM.dd"))
 df_src2_6 = df_src2_5.withColumn("UTCDate", to_date("UTCDate", "yyyy.MM.dd"))
 
 df7 =  df6.filter(col("Result") != '*')
-## Change this
+
 df_src2_7 =  df_src2_6.filter(col("Result") != '*')
 
 

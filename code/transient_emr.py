@@ -17,7 +17,7 @@ def lambda_handler(event, context):
     postfix,
     ]
     print("Spark Submit : ",spark_submit)
-    # define the cluster
+
     cluster_id = client.run_job_flow(
     Name = "transient_demo_testing",
     Instances = {
@@ -48,7 +48,7 @@ def lambda_handler(event, context):
     'ActionOnFailure': 'CONTINUE',
     'HadoopJarStep': {
     'Jar': 's3n://elasticmapreduce/libs/script-runner/script-runner.jar',
-    # passed to the backend code
+ 
     'Args': spark_submit
     }
     }],
