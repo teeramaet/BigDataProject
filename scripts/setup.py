@@ -97,6 +97,7 @@ def create_lambda_emr(ACCESS_KEY: str, SECRET_KEY:str, SESSION_TOKEN: str, postf
             FunctionName='Create-transient-emr',
             Principal='s3.amazonaws.com',
             SourceArn=SOURCEARN,
+            StatementId='s3',
         )
 
 
