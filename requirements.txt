@@ -16,6 +16,7 @@ cffi==1.16.0
 charset-normalizer==3.3.2
 colorama==0.4.4
 comm==0.2.0
+cramjam==2.7.0
 cx-Freeze==6.15.10
 cx-Logging==3.1.0
 debugpy==1.8.0
@@ -24,7 +25,9 @@ defusedxml==0.7.1
 docutils==0.16
 executing==2.0.1
 fastjsonschema==2.18.1
+fastparquet==2023.10.1
 fqdn==1.5.1
+fsspec==2023.10.0
 idna==3.4
 ipykernel==6.26.0
 ipython==8.17.2
@@ -73,6 +76,7 @@ prompt-toolkit==3.0.39
 psutil==5.9.6
 pure-eval==0.2.2
 py4j==0.10.9.7
+pyarrow==14.0.1
 pyasn1==0.5.0
 pycparser==2.21
 pygame==2.5.2
