@@ -12,7 +12,7 @@ def lambda_handler(event, context):
     spark_submit = [
     '/usr/bin/spark-submit',
     '--master', 'yarn',
-    '--deploy-mode', 'cluster',
+    '--deploy-mode', 'client',
     backend_code,
     postfix,
     ]

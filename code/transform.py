@@ -10,16 +10,16 @@ spark = SparkSession.builder\
 
 postfix = sys.argv[1]
 
-PATH_SAHIT_SOURCE = "s3://landing-zone-" + postfix + "/chess_game_SAHIT.parquet"
-PATH_REVEL_SOURCE = "s3://landing-zone-" + postfix + "/chess_game_REVEL.parquet"
+PATH_SAHIT_SOURCE = "s3://landing-zone-" + postfix + "/chess_game_SAHIT.csv"
+PATH_REVEL_SOURCE = "s3://landing-zone-" + postfix + "/chess_game_REVEL.csv"
 PATH_SAHIT_DESTINATION = "s3://cleaning-zone-" + postfix + "/chess_game_SAHIT_clean.parquet"
 PATH_REVEL_DESTINATION = "s3://cleaning-zone-" + postfix + "/chess_game_REVEL_clean.parquet"
 
 print(PATH_REVEL_DESTINATION)
 print(PATH_SAHIT_SOURCE)
 
-df_src2_1 = spark.read.options(header='true', inferSchema='true').parquet(PATH_SAHIT_SOURCE)
-df1 = spark.read.options(header='true', inferSchema='true').parquet(PATH_REVEL_SOURCE)
+df_src2_1 = spark.read.options(header='true', inferSchema='true').csv(PATH_SAHIT_SOURCE)
+df1 = spark.read.options(header='true', inferSchema='true').csv(PATH_REVEL_SOURCE)
 
 df_src2_2 = df_src2_1.withColumnRenamed('Date', 'UTCDate') 
 

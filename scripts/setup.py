@@ -146,8 +146,8 @@ if __name__ == "__main__":
 
     print("Uploading file ...")
     #upload_file(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, "../data_source/parquet/chess_game_MITCHELL.parquet", LANDINGZONE )
-    upload_file(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, "../data_source/parquet/chess_game_REVEL.parquet", LANDINGZONE)
-    upload_file(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, "../data_source/parquet/chess_game_SAHIT.parquet", LANDINGZONE)
+    upload_file(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, "../data_source/csv/chess_game_REVEL.csv", LANDINGZONE)
+    upload_file(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, "../data_source/csv/chess_game_SAHIT.csv", LANDINGZONE)
 
     upload_file(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, "../code/transform.py", CODEBUCKET)
     print("Finish uploading")
