@@ -4,10 +4,9 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, when, to_date, monotonically_increasing_id
 
 spark = SparkSession.builder\
-.master("local")\
 .appName("Word Count")\
 .getOrCreate()
-#.config("spark.some.config.option", "some-value")\
+
 
 postfix = sys.argv[1]
 
@@ -31,8 +30,8 @@ df2 = df1.withColumn("Result", when((col("WhiteRatingDiff") < 0) & (col("BlackRa
     .otherwise(col("Result"))
 )
 
-df3 = df2.dropDuplicates().drop("Format").drop("AN").drop("WhiteRatingDiff").drop("BlackRatingDiff").drop("UTCTime")
-df_src2_3 = df_src2_2.dropDuplicates().drop("Format").drop("Round").drop("WhiteRatingDiff")
+df3 = df2.dropDuplicates().drop("TimeControl").drop("AN").drop("WhiteRatingDiff").drop("BlackRatingDiff").drop("UTCTime")
+df_src2_3 = df_src2_2.dropDuplicates().drop("TimeControl").drop("Round").drop("WhiteRatingDiff")
 
 df4 = df3.filter(
     (df3["Event"].contains("Blitz")) |
