@@ -65,5 +65,5 @@ df9 = df8.select("id", "Event", "White", "Black", "Result", "UTCDate", "WhiteElo
 df_src2_9 = df_src2_8.select("id", "Event", "White", "Black", "Result", "UTCDate", "WhiteElo", "BlackElo", "ECO", "Opening", "Termination")
 
 
-df9.coalesce(1).write.parquet(PATH_REVEL_DESTINATION)
-df_src2_9.coalesce(1).write.parquet(PATH_SAHIT_DESTINATION)
+df9.coalesce(1).write.mode("overwrite").parquet(PATH_REVEL_DESTINATION)
+df_src2_9.coalesce(1).write.mode("overwrite").parquet(PATH_SAHIT_DESTINATION)

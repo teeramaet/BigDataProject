@@ -20,6 +20,17 @@ def create_bucket(ACCESS_KEY: str, SECRET_KEY:str, SESSION_TOKEN: str, bucket_na
     except ClientError as e:
         logging.error(e)
         return False
+    try:
+        response = s3_client.put_bucket_versioning(
+            #AccountId='string',
+            Bucket=bucket_name,
+            VersioningConfiguration={
+                'Status': 'Enabled'
+            }
+        )
+    except ClientError as e:
+        logging.error(e)
+        return False
     return True
 
 
@@ -157,13 +168,14 @@ def create_lambda_glue(ACCESS_KEY: str, SECRET_KEY:str, SESSION_TOKEN: str, post
             FunctionName = 'Create-lambda-glue',
             Runtime = 'python3.8',
             Role = role['Role']['Arn'],
-            Handler = 'lambda-glue.lambda_handler',
+            Handler = 'lambda_glue.lambda_handler',
             Code = dict(ZipFile = zipped_code),
             Description='Lambda function triggered by S3 file creation',
             Timeout = 300,
             Environment={
                 'Variables': {
-                    'postfix': postfix
+                    'postfix': postfix,
+                    'role': role['Role']['Arn']
             },
         },
         )
@@ -202,6 +214,22 @@ def create_lambda_glue(ACCESS_KEY: str, SECRET_KEY:str, SESSION_TOKEN: str, post
         return False
     return True 
 
+def create_glue_database(ACCESS_KEY: str, SECRET_KEY:str, SESSION_TOKEN: str, postfix: str) -> bool:
+    client = boto3.client('glue',  
+    aws_access_key_id=ACCESS_KEY,
+    aws_secret_access_key=SECRET_KEY,
+    aws_session_token=SESSION_TOKEN, 
+    region_name='us-east-1'
+    )
+    DATABASENAME = "chessdb-" + postfix
+    try:
+        response = client.create_database(
+             DatabaseInput={'Name': DATABASENAME,}
+        )
+    except ClientError as e:
+        logging.error(e)
+        return False
+    return True
 
 if __name__ == "__main__":
     ACCESS_KEY = sys.argv[1]
@@ -214,7 +242,7 @@ if __name__ == "__main__":
     LANDINGZONE = "landing-zone-" + postfix
     CLEANINGBUCKET = "cleaning-zone-" + postfix
     QUERYRESULTBUCKET = "query-result-" + postfix
-
+    
     print("Creating Buckets ...")
     create_bucket(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, CODEBUCKET)
     create_bucket(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, LANDINGZONE)
@@ -230,6 +258,13 @@ if __name__ == "__main__":
     upload_file(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, "../code/transform.py", CODEBUCKET)
     print("Finish uploading")
 
+    print("Creating Glue Database")
+    create_glue_database(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, postfix)
+    print("Creating finish")
+
     print("Creating Lambda")
     create_lambda_emr(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, postfix)
+    create_lambda_glue(ACCESS_KEY, SECRET_KEY, SESSION_TOKEN, postfix)
     print("Creating finish")
+
+
