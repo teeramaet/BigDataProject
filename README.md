@@ -55,8 +55,9 @@ python setup.py <YOUR ACCESS_KEY> <YOUR SESSION_KEY> <YOUR ACCESS_KEY> <A RANDOM
 ## 5. Set the destination bucket for athena query result
 
 ![Picture of setting athena](/images/querysetting.png "athena bucket setting")
+change test-demo to your postfix
 
 ## EXTRA if you want to explore the data by running
 
-cd jupyter
+cd jupyter \
 jupyter notebook
