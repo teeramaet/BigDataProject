@@ -124,6 +124,84 @@ def create_lambda_emr(ACCESS_KEY: str, SECRET_KEY:str, SESSION_TOKEN: str, postf
         return False
     return True 
 
+def create_lambda_glue(ACCESS_KEY: str, SECRET_KEY:str, SESSION_TOKEN: str, postfix: str) -> bool:
+
+    SOURCEARN = "arn:aws:s3:::cleaning-zone-" + postfix
+    CLEANINGZONE = "cleaning-zone-" + postfix
+
+    s3_client = boto3.client('s3',  
+    aws_access_key_id=ACCESS_KEY,
+    aws_secret_access_key=SECRET_KEY,
+    aws_session_token=SESSION_TOKEN)
+
+    iam_client = boto3.client('iam',  
+    aws_access_key_id=ACCESS_KEY,
+    aws_secret_access_key=SECRET_KEY,
+    aws_session_token=SESSION_TOKEN)
+
+    lambda_client = boto3.client('lambda',  
+    aws_access_key_id=ACCESS_KEY,
+    aws_secret_access_key=SECRET_KEY,
+    aws_session_token=SESSION_TOKEN, region_name='us-east-1')
+
+    script_dir = os.path.dirname(__file__) 
+    rel_path = "../code/lambda_glue.zip"
+    zip_file_path = os.path.join(script_dir, rel_path)
+
+    with open(zip_file_path, 'rb') as f:
+        zipped_code = f.read()
+        
+    role = iam_client.get_role(RoleName='LabRole')
+    try:
+        response = lambda_client.create_function(
+            FunctionName = 'Create-lambda-glue',
+            Runtime = 'python3.8',
+            Role = role['Role']['Arn'],
+            Handler = 'lambda-glue.lambda_handler',
+            Code = dict(ZipFile = zipped_code),
+            Description='Lambda function triggered by S3 file creation',
+            Timeout = 300,
+            Environment={
+                'Variables': {
+                    'postfix': postfix
+            },
+        },
+        )
+    except ClientError as e:
+        logging.error(e)
+        return False
+    
+    time.sleep(10)
+
+    try:
+        response2 = lambda_client.add_permission(
+            Action='lambda:InvokeFunction',
+            FunctionName='Create-lambda-glue',
+            Principal='s3.amazonaws.com',
+            SourceArn=SOURCEARN,
+            StatementId='s3glue',
+        )
+
+
+        s3_notification_config = {
+            'LambdaFunctionConfigurations': [
+                {
+                'LambdaFunctionArn': response['FunctionArn'],
+                'Events': ['s3:ObjectCreated:*'],
+                }
+            ]
+        }
+    
+        s3_client.put_bucket_notification_configuration(
+            Bucket = CLEANINGZONE,
+            NotificationConfiguration = s3_notification_config,
+        )
+        
+    except ClientError as e:
+        logging.error(e)
+        return False
+    return True 
+
 
 if __name__ == "__main__":
     ACCESS_KEY = sys.argv[1]

@@ -5,10 +5,9 @@ client = boto3.client('emr', region_name='us-east-1')
 
 def lambda_handler(event, context):
     
-    # location of code to run
     postfix = os.environ['postfix']
     backend_code = "s3://code-" + postfix + "/transform.py"
-    # define the job details, location of script to run etc
+
     spark_submit = [
     '/usr/bin/spark-submit',
     '--master', 'yarn',
