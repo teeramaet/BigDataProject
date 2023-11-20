@@ -49,7 +49,19 @@ Then, zip the transient_emr.py to transient_emr.zip
 
 ## 4. Run script to set up our the pipeline
 
-cd scripts
+### How to find access key, session key, access key
+
+#### Go to aws detail and click show aws cli
+
+![Picture of aws detail](/images/2566-11-21%2003_06_38-Launch%20AWS%20Academy%20Learner%20Lab%20and%202%20more%20pages%20-%20Work%20-%20Microsoft​%20Edge.png "find key")
+
+#### This is your keys
+
+![Picture of aws detail](/images/2566-11-21%2003_07_39-Launch%20AWS%20Academy%20Learner%20Lab%20and%202%20more%20pages%20-%20Work%20-%20Microsoft​%20Edge.png "find key")
+
+#### Then
+
+cd scripts \
 python setup.py <YOUR ACCESS_KEY> <YOUR SESSION_KEY> <YOUR ACCESS_KEY> <A RANDOM NUMBER FOR AS A POSTFIX>
 
 ## 5. Set the destination bucket for athena query result
@@ -58,5 +70,5 @@ python setup.py <YOUR ACCESS_KEY> <YOUR SESSION_KEY> <YOUR ACCESS_KEY> <A RANDOM
 
 ## EXTRA if you want to explore the data by running
 
-cd jupyter
+cd jupyter \
 jupyter notebook
