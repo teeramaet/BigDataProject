@@ -1,8 +1,10 @@
 # BigDataProject
-# ASSUME that you use learner lab and you have these role LabRole, EMR_DefaultRole, EMR_EC2_DefaultRole
-# The file in data_source/csv is a sample of the real big file. This is because github is not allow to store large fiile and this is good for test purpose
 
-# So, please download the data set from https://www.kaggle.com/datasets/arevel/chess-games and put it in data_source/csv and name chess_game_REVEL
+**Assuming you are using AWS Learner Lab and have the following roles: LabRole, EMR_DefaultRole, and EMR_EC2_DefaultRole, please follow these instructions:**
+**Download the dataset from https://www.kaggle.com/datasets/arevel/chess-games.**
+**Save the downloaded dataset to the "data_source/csv" directory. You can use a sample of the real dataset that we provided since GitHub does not allow the storage of large files, which is still suitable for testing purposes.**
+**Rename the dataset to "chess_game_REVEL."**
+**These steps will ensure that you have the dataset ready for your testing needs while adhering to GitHub's file size restrictions.**
 
 ## Set up your virtual environment name env
 ### For Window run
@@ -28,10 +30,10 @@ deactivate
 pip install -r requirements.txt
 
 ## 3. Configure files to your setting
-In code/transient_emr.py
-    'Ec2KeyName': 'vockey',
-    'Ec2SubnetId': 'subnet-03022b7fca1546530',
-    LogUri="s3://aws-logs-580632447399-us-east-1/elasticmapreduce/",
+In code/transient_emr.py \
+'Ec2KeyName': 'vockey',\
+'Ec2SubnetId': 'subnet-03022b7fca1546530',\
+LogUri="s3://aws-logs-580632447399-us-east-1/elasticmapreduce/", 
 
 Then, zip the transient_emr.py to transient_emr.zip
 
