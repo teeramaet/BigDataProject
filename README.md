@@ -62,7 +62,7 @@ Then, zip the transient_emr.py to transient_emr.zip
 #### Then
 
 cd scripts \
-python setup.py <YOUR ACCESS_KEY> <YOUR SESSION_KEY> <YOUR ACCESS_KEY> <A RANDOM NUMBER FOR AS A POSTFIX>
+python setup.py "YOUR ACCESS_KEY" "YOUR SESSION_KEY" "YOUR ACCESS_KEY" "A RANDOM NUMBER FOR AS A POSTFIX"
 
 ## 5. Set the destination bucket for athena query result
 
